@@ -81,6 +81,5 @@ function sendSlack(text){
             }
         ]
     }
-    //axios.post(slackWebhook, message);
-    console.log(text);
+    axios.post(slackWebhook, message);
 }
