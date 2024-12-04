@@ -60,7 +60,7 @@ function sendAlerts(challenges){
         })
         .catch(() => {
             const allUsers = [...new Set(Object.keys(challenges).map(key => challenges[key]).flat())]
-            const text = `${allUsers.join(",")} have all completed a challenge in the last hour, sorry no witty AI resposne this time`;
+            const text = `${allUsers.join(",")} have all completed a challenge in the last hour, sorry no witty AI response this time`;
             sendSlack(text);
         });
 }
