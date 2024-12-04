@@ -27,7 +27,9 @@ axios.get(`https://adventofcode.com/2024/leaderboard/private/view/${leaderBoardI
         const oldUsers = previousDays[challenge] || [];
         const currentUsers = days[challenge];
         const newUsers = currentUsers.filter((user) => !oldUsers.includes(user));
-        challenges[challenge] = newUsers;
+        if (newUsers.length > 0) {
+            challenges[challenge] = newUsers;
+        }
     }
     if (Object.keys(challenges).length > 0){
         sendAlerts(challenges);
