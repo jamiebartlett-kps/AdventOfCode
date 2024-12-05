@@ -80,9 +80,8 @@ function sendSlack(text){
             {
                 "type": "section",
                 "text": {
-                    "type": "plain_text",
-                    text,
-                    "emoji": true
+                    "type": "mrkdwn",
+                    text
                 }
             }
         ]
