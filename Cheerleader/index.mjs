@@ -55,12 +55,13 @@ function createDays(members){
 function sendAlerts(challenges){
     const randomIndex = Math.floor(Math.random() * styles.length);
     const style = styles[randomIndex];
-    const question = `We're doing an advent calendar of coding challenges at work, below is a JSON representation of each challenge and who has completed them in the last hour. This doesn't mean people haven't done it, they may have finished it earlier. Please give me a ${style} response for our slack channel to update everyone on whose completed challenges this hour. Don't give me options, just a single response please: ${JSON.stringify(challenges, null, 2)}`;
+    const question = `Here's the data for the last hour, give me a ${style} update please, make sure you call out the people who've just finished it by name. If you could refer to previous updates to make it contextual that would be great. Just one response: ${JSON.stringify(challenges, null, 2)}`;
     geminiService.askQuestion(question)
         .then((text) => {
             sendSlack(text);
         })
-        .catch(() => {
+        .catch((error) => {
+            console.error(error);
             const allUsers = [...new Set(Object.keys(challenges).map(key => challenges[key]).flat())]
             const text = `${allUsers.join(",")} have all completed a challenge in the last hour, sorry no witty AI response this time`;
             sendSlack(text);
@@ -80,5 +81,6 @@ function sendSlack(text){
             }
         ]
     }
+    console.log(text);
     axios.post(slackWebhook, message);
 }
