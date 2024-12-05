@@ -11,7 +11,7 @@ const sessionCookie = process.env.SESSION_ID;
 
 const leaderboardLocation = process.env.LEADERBOARD_LOCATION;
 
-const styles = ['sassy', 'enthusiastic', 'sarcastic', 'witty', 'nerdy', 'christmassy'];
+const styles = ['sassy', 'enthusiastic', 'sarcastic', 'witty', 'nerdy', 'christmassy', 'alliterative', 'pun-filled'];
 
 const headers = {
     'Cookie' : `session=${sessionCookie}`
@@ -31,8 +31,14 @@ axios.get(`https://adventofcode.com/2024/leaderboard/private/view/${leaderBoardI
             challenges[challenge] = newUsers;
         }
     }
+    
     if (Object.keys(challenges).length > 0){
-        sendAlerts(challenges);
+        //Let's work out the leaderboard so the AI can see that too.
+        const leaderboard = Object.keys(data.members)
+            .map(key => data.members[key])
+            .map(({name, local_score}) => ({name, local_score}));
+        leaderboard.sort((a,b) => b.local_score - a.local_score);
+        sendAlerts(challenges, leaderboard);
     }
     fs.writeFileSync(leaderboardLocation, JSON.stringify(data, null, 2), 'utf8');
 });
@@ -52,10 +58,10 @@ function createDays(members){
     }, [])
 }
 
-function sendAlerts(challenges){
+function sendAlerts(challenges, leaderboard){
     const randomIndex = Math.floor(Math.random() * styles.length);
     const style = styles[randomIndex];
-    const question = `Here's the data for the last three hours, give me a ${style} update please, make sure you call out the people who've just finished it by name. If you could refer to previous updates to make it contextual that would be great. Just one response: ${JSON.stringify(challenges, null, 2)}`;
+    const question = `Here's the data for the last three hours, give me a ${style} update please, make sure you call out the people who've just finished it by name. If you could refer to previous updates to make it contextual that would be great. Just one response: ${JSON.stringify(challenges, null, 2)} - If it helps here is the complete leaderboard after this update ${JSON.stringify(leaderboard, null, 2)}`;
     geminiService.askQuestion(question)
         .then((text) => {
             sendSlack(text);
