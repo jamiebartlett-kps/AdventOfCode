@@ -55,7 +55,7 @@ function createDays(members){
 function sendAlerts(challenges){
     const randomIndex = Math.floor(Math.random() * styles.length);
     const style = styles[randomIndex];
-    const question = `Here's the data for the last hour, give me a ${style} update please, make sure you call out the people who've just finished it by name. If you could refer to previous updates to make it contextual that would be great. Just one response: ${JSON.stringify(challenges, null, 2)}`;
+    const question = `Here's the data for the last three hours, give me a ${style} update please, make sure you call out the people who've just finished it by name. If you could refer to previous updates to make it contextual that would be great. Just one response: ${JSON.stringify(challenges, null, 2)}`;
     geminiService.askQuestion(question)
         .then((text) => {
             sendSlack(text);
