@@ -61,7 +61,7 @@ function createDays(members){
 function sendAlerts(challenges, leaderboard){
     const randomIndex = Math.floor(Math.random() * styles.length);
     const style = styles[randomIndex];
-    const question = `Here's todays data, give me a ${style} update please, make sure you call out the people who've just finished it by name. If you could refer to previous updates to make it contextual that would be great. Just one response: ${JSON.stringify(challenges, null, 2)} - Also, here is the complete leaderboard after this update ${JSON.stringify(leaderboard, null, 2)} please provide an update on the top 5 and any changes since the last update`;
+    const question = `Here's todays data, give me a ${style} update please, make sure you call out the people who've just finished it by name. If you could refer to previous updates to make it contextual that would be great. Just one response: ${JSON.stringify(challenges, null, 2)} - Also, here is the complete leaderboard after this update ${JSON.stringify(leaderboard, null, 2)} please provide a bullet pointed list of the top 5 and highlight any changes since the last update`;
     geminiService.askQuestion(question)
         .then((text) => {
             sendSlack(text);
@@ -69,7 +69,7 @@ function sendAlerts(challenges, leaderboard){
         .catch((error) => {
             console.error(error);
             const allUsers = [...new Set(Object.keys(challenges).map(key => challenges[key]).flat())]
-            const text = `${allUsers.join(",")} have all completed a challenge in the last hour, sorry no witty AI response this time`;
+            const text = `${allUsers.join(",")} have all completed a challenge today. sorry no witty AI response this time`;
             sendSlack(text);
         });
 }
