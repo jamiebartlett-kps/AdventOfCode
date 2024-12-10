@@ -1,7 +1,6 @@
-import fs from 'fs';
 import { createGrid, directions, outOfBounds, dedupe } from './utils.mjs';
 
-const fullInput = fs.readFileSync('./Input/Day10.txt', 'utf-8');
+const fullInput = readPuzzleInput(10);
 const testInput = `
 89010123
 78121874

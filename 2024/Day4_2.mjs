@@ -1,6 +1,6 @@
-import fs from 'fs';
+import {readPuzzleInput} from './utils.mjs'
 
-const wordsearch = fs.readFileSync('./Input/Day4.txt', 'utf-8');
+const wordsearch = readPuzzleInput(4);
 const testWordsearch = `
 MMMSXXMASM
 MSAMXMSMSA

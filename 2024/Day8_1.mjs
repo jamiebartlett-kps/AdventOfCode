@@ -1,6 +1,6 @@
-import fs from 'fs';
+import { readPuzzleInput, createGrid, outOfBounds } from './utils.mjs';
 
-const fullInput = fs.readFileSync('./Input/Day8.txt', 'utf-8');
+const fullInput = readPuzzleInput(8);
 
 const testInput = `
 ............
@@ -18,13 +18,10 @@ const testInput = `
 
 const underReview = fullInput;
 
-const grid = underReview
-    .trim()
-    .split("\n")
-    .map((row) => row.split(""));
+const grid = createGrid(underReview);
 
-const anttenaePositions = grid.reduce((acc, row, y) => {
-    row.forEach((square, x) => {
+const anttenaePositions = grid.reduce((acc, col, x) => {
+    col.forEach((square, y) => {
         if (square != '.'){
             if (!acc[square]){
                 acc[square] = [];
@@ -57,9 +54,7 @@ for (let type of Object.keys(anttenaePositions)) {
 }
 
 //remove OOB
-allAntinodes = allAntinodes.filter((node) => 
-    node.x >= 0 && node.y >= 0 && node.x < grid[0].length && node.y < grid.length
-);
+allAntinodes = allAntinodes.filter((node) => !outOfBounds(node, grid));
 
 //dedupe
 allAntinodes = allAntinodes.reduce((acc, node) => {

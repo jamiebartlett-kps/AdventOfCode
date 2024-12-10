@@ -1,3 +1,7 @@
+import fs from 'fs';
+
+export const readPuzzleInput = (day) => fs.readFileSync(`./Input/Day${day}.txt`, 'utf-8');
+
 export function createGrid(str, operator = (a) => a){
     const rotated = str.trim().split("\n").map((a) => a.split(""));
     return rotated[0].map((_, x) => rotated.map(row => operator(row[x])))

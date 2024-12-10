@@ -1,6 +1,6 @@
-import fs from 'fs';
+import { directions, createGrid, readPuzzleInput, outOfBounds, dedupe } from './utils.mjs';
 
-const fullInput = fs.readFileSync('./Input/Day6.txt', 'utf-8');
+const fullInput = readPuzzleInput(6);
 const testInput = `....#.....
 .........#
 ..........
@@ -14,13 +14,7 @@ const testInput = `....#.....
 
 const underReview = fullInput;
 
-const grid = underReview.trim().split("\n").map((line) => line.split(""));
-const directions = [
-    {x:0,y:-1},
-    {x:1,y:0},
-    {x:0,y:1},
-    {x:-1,y:0}
-]
+const grid = createGrid(underReview);
 
 let turnCount = 0;
 
@@ -28,8 +22,8 @@ let turnCount = 0;
 let position = {x : 0, y: 0}
 let visited = [];
 
-grid.forEach((row, y) => 
-    row.forEach((square, x) => {
+grid.forEach((col, x) => 
+    col.forEach((square, y) => {
         if (square == '^'){
             position = {x,y};
             visited.push(position);
@@ -37,16 +31,16 @@ grid.forEach((row, y) =>
     })
 )
 
-while (!outOfBounds(position)){
+while (!outOfBounds(position, grid)){
     const direction = directions[turnCount % 4]
     let newPosition = {
         x : position.x + direction.x,
         y : position.y + direction.y
     }
-    if (outOfBounds(newPosition)){
+    if (outOfBounds(newPosition, grid)){
         break;
     }
-    if (grid[newPosition.y][newPosition.x] == '#'){
+    if (grid[newPosition.x][newPosition.y] == '#'){
         turnCount++;
         continue;
     } else {
@@ -56,15 +50,6 @@ while (!outOfBounds(position)){
 }
 
 //De dupe the visited list
-export const uniqueVisited = visited.reduce((acc, square) => {
-    if (!acc.some(({x,y}) => x == square.x && y == square.y)){
-        acc.push(square);
-    }
-    return acc;
-}, []);
+export const uniqueVisited = dedupe(visited);
 
 console.log(uniqueVisited.length);
-
-function outOfBounds({x,y}){
-    return x < 0 || x >= grid[0].length || y < 0 || y >= grid.length;
-}

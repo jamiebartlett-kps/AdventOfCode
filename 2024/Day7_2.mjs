@@ -1,6 +1,6 @@
-import fs from 'fs';
+import {readPuzzleInput} from './utils.mjs'
 
-const fullInput = fs.readFileSync('./Input/Day7.txt', 'utf-8');
+const fullInput = readPuzzleInput(7);
 const testInput = `190: 10 19
 3267: 81 40 27
 83: 17 5
