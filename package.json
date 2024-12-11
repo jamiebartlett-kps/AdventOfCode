@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "node Runner.mjs"
+    "test": "node --max-old-space-size=4096 Runner.mjs"
   },
   "author": "",
   "license": "ISC",

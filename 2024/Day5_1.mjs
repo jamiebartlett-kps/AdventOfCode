@@ -1,4 +1,4 @@
-import {readPuzzleInput} from './utils.mjs'
+import {readPuzzleInput} from '../utils.mjs'
 
 const fullInput = readPuzzleInput(5);
 const testInput = `

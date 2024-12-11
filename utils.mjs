@@ -1,6 +1,11 @@
 import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-export const readPuzzleInput = (day) => fs.readFileSync(`./Input/Day${day}.txt`, 'utf-8');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export const readPuzzleInput = (day, year = "2024") => fs.readFileSync(`./${year}/Input/Day${day}.txt`, 'utf-8')
 
 export function createGrid(str, operator = (a) => a){
     const rotated = str.trim().split("\n").map((a) => a.split(""));
@@ -33,4 +38,16 @@ export function dedupe(arr){
         }
         return acc;
     }, []);
+}
+
+export const wordMap = {
+    "one" : 1,
+    "two" : 2,
+    "three" : 3,
+    "four" : 4,
+    "five" : 5,
+    "six" : 6,
+    "seven" : 7,
+    "eight" : 8,
+    "nine" : 9
 }

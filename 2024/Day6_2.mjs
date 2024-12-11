@@ -1,5 +1,5 @@
 import {uniqueVisited} from './Day6_1.mjs';
-import { directions, readPuzzleInput, outOfBounds, createGrid } from './utils.mjs';
+import { directions, readPuzzleInput, outOfBounds, createGrid } from '../utils.mjs';
 
 const fullInput = readPuzzleInput(6);
 const testInput = `....#.....

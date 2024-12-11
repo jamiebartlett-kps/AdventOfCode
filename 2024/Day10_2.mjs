@@ -1,4 +1,4 @@
-import { createGrid, directions, outOfBounds, readPuzzleInput } from './utils.mjs';
+import { createGrid, directions, outOfBounds, readPuzzleInput } from '../utils.mjs';
 
 const fullInput = readPuzzleInput(10);
 const testInput = `
