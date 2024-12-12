@@ -13,10 +13,10 @@ export function createGrid(str, operator = (a) => a){
 }
 
 export const directions = [
-    {x:0,y:-1},
-    {x:1,y:0},
-    {x:0,y:1},
-    {x:-1,y:0}
+    {x:0,y:-1, dir:"up"},
+    {x:1,y:0, dir:"right"},
+    {x:0,y:1, dir:"down"},
+    {x:-1,y:0, dir:"left"}
 ]
 
 export function outOfBounds(pos, grid){
@@ -50,4 +50,8 @@ export const wordMap = {
     "seven" : 7,
     "eight" : 8,
     "nine" : 9
+}
+
+export function calculateNewPos(pos, direction){
+    return {x:pos.x + direction.x, y:pos.y + direction.y};
 }
