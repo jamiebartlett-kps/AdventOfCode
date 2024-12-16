@@ -55,3 +55,16 @@ export const wordMap = {
 export function calculateNewPos(pos, direction){
     return {x:pos.x + direction.x, y:pos.y + direction.y};
 }
+
+export function getLastElement(arr){
+    return arr[arr.length - 1];
+}
+
+export function findInGrid(obj, grid){
+    for (let x=0;x<grid.length;x++){
+        const col = grid[x];
+        for (let y=0;y<col.length;y++){
+            if (col[y] == obj) return {x,y};
+        }
+    }
+}
