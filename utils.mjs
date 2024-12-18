@@ -1,11 +1,23 @@
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import request from 'sync-request';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export const readPuzzleInput = (day, year = "2024") => fs.readFileSync(`./${year}/Input/Day${day}.txt`, 'utf-8')
+export const readPuzzleInput = (day, year = "2024") => {
+    const url = `https://adventofcode.com/${year}/day/${day}/input`;
+    const headers = {
+      'Cookie' : `session=${process.env.SESSION_ID}`
+    };
+  
+    const res = request('GET', url, { headers });
+    return res.getBody('utf-8');
+  };
 
 export function createGrid(str, operator = (a) => a){
     const rotated = str.trim().split("\n").map((a) => a.split(""));
