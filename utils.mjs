@@ -1,13 +1,7 @@
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-import path from 'path';
 import request from 'sync-request';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export const readPuzzleInput = (day, year = "2024") => {
     const url = `https://adventofcode.com/${year}/day/${day}/input`;
