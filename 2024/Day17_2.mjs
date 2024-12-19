@@ -1,4 +1,4 @@
-import { readPuzzleInput } from "../utils.mjs";
+import { readPuzzleInput, arraysEqual } from "../utils.mjs";
 
 const fullInput = readPuzzleInput(17);
 const testInput = `
@@ -108,13 +108,6 @@ function runProgram(a){
     }
 
     return outputs;
-}
-
-function arraysEqual(arr1, arr2) {
-    if (arr1.length != arr2.length) {
-        return false;
-    }
-    return arr1.every((value, index) => value == arr2[index]);
 }
 
 function compareLastNDigits(arr1, arr2, length){

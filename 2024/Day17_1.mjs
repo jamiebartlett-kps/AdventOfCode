@@ -41,7 +41,7 @@ function adv(op){
 
 function bxl(op){
     executedOpcodes.push("bxl");
-    registers.b = registers.b ^ op;
+    registers.b = (registers.b ^ op) >>> 0;
     instructionPointer += 2;
 }
 
@@ -62,7 +62,7 @@ function jnz(op){
 
 function bxc(op){
     executedOpcodes.push("bxc");
-    registers.b = registers.c ^ registers.b;
+    registers.b = (registers.c ^ registers.b) >>> 0;
     instructionPointer += 2;
 }
 
@@ -107,3 +107,4 @@ while (instructionPointer < program.length){
 executedOpcodes = [...new Set(executedOpcodes)];
 console.log(executedOpcodes);
 console.log(outputs.join(","));
+console.log(program.join(","));

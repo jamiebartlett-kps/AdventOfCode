@@ -11,7 +11,7 @@ const sessionCookie = process.env.SESSION_ID;
 
 const leaderboardLocation = process.env.LEADERBOARD_LOCATION;
 
-const styles = ['rude', 'enthusiastic', 'sarcastic', 'witty', 'nerdy', 'christmassy', 'alliterative', 'pun-filled'];
+const styles = ['rude', 'enthusiastic', 'sarcastic', 'christmassy', 'rhyming'];
 
 const headers = {
     'Cookie' : `session=${sessionCookie}`
